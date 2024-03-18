@@ -4,11 +4,11 @@ const BoardContent = () => {
   return (
     <Box
       sx={{
-        backgroundColor: 'primary.main',
         width: '100%',
         height: (theme) => `calc(100vh - ${theme.app.appBarHeight} - ${theme.app.boardBarHeight})`,
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#3498db')
       }}
     >
       Board Content

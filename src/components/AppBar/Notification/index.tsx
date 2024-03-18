@@ -4,8 +4,8 @@ import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 const Notification = () => {
   return (
     <Tooltip title="Notification">
-      <Badge color="secondary" variant="dot" sx={{ cursor: 'pointer' }}>
-        <NotificationsNoneIcon sx={{ color: 'primary.main' }} />
+      <Badge color="warning" variant="dot" sx={{ cursor: 'pointer' }}>
+        <NotificationsNoneIcon sx={{ color: 'white' }} />
       </Badge>
     </Tooltip>
   )

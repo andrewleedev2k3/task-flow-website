@@ -5,13 +5,13 @@ import { AddToDrive, Bolt, FilterList, PersonAdd, VpnLock } from '@mui/icons-mat
 import InviteList from '@/pages/Boards/BoardBar/InviteList'
 import { Button } from '@mui/material'
 const MENU_STYLE = {
-  color: 'primary.main',
-  bgcolor: 'white',
+  color: 'white',
+  bgcolor: 'transparent',
   border: 'none',
   paddingX: 2,
   borderRadius: 2,
   '& .MuiSvgIcon-root': {
-    color: 'primary.main'
+    color: 'white'
   },
   '&:hover': {
     bgcolor: 'primary.50'
@@ -29,7 +29,7 @@ const BoardBar = () => {
         gap: 2,
         paddingX: 2,
         overflowX: 'auto',
-        borderTop: '1px solid #bbbbba'
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#3498db')
       }}
     >
       <Box
@@ -52,7 +52,17 @@ const BoardBar = () => {
           gap: 2
         }}
       >
-        <Button variant="outlined" startIcon={<PersonAdd />}>
+        <Button
+          sx={{
+            color: 'white',
+            borderColor: 'white',
+            '&:hover': {
+              borderColor: 'white'
+            }
+          }}
+          variant="outlined"
+          startIcon={<PersonAdd />}
+        >
           Invite
         </Button>
         <InviteList />
