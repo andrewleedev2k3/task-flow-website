@@ -12,16 +12,19 @@ import Helps from '@/components/AppBar/Helps'
 import MenuDrawer from '@/components/AppBar/Menus/MenuDrawer'
 import Started from '@/components/AppBar/Menus/Started'
 import Templates from '@/components/AppBar/Menus/Templates'
+import Button from '@mui/material/Button'
+import { LibraryAdd } from '@mui/icons-material'
+
 const AppBar = () => {
   return (
     <Box
-      px={2}
       sx={{
         width: '100%',
         height: (theme) => theme.app.appBarHeight,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
+        paddingX: 2,
         gap: 2,
         overflowX: 'auto'
       }}
@@ -65,6 +68,9 @@ const AppBar = () => {
           <Started />
           <Templates />
         </Box>
+        <Button variant="outlined" endIcon={<LibraryAdd />}>
+          Create
+        </Button>
       </Box>
 
       <Box
