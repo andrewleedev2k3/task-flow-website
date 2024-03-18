@@ -6,6 +6,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [react()],
   resolve: {
+    // Relative import
     alias: {
       '@': resolve(__dirname, './src')
     }
