@@ -4,7 +4,7 @@ import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 const Helps = () => {
   return (
     <Tooltip title="Helps">
-      <Badge color="secondary" sx={{ cursor: 'pointer', color: 'primary.main' }}>
+      <Badge color="secondary" sx={{ cursor: 'pointer', color: 'white' }}>
         <HelpOutlineIcon />
       </Badge>
     </Tooltip>

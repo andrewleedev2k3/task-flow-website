@@ -55,7 +55,7 @@ const MenuDrawer = () => {
           alignItems: 'center'
         }}
       >
-        <MenuIcon sx={{ color: 'primary.main' }} />
+        <MenuIcon sx={{ color: 'white' }} />
       </Button>
       <Drawer open={open} onClose={toggleDrawer(false)}>
         {DrawerList}

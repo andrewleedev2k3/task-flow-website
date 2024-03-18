@@ -26,7 +26,8 @@ const AppBar = () => {
         justifyContent: 'space-between',
         paddingX: 2,
         gap: 2,
-        overflowX: 'auto'
+        overflowX: 'auto',
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#2c3e50' : '#2980b9')
       }}
     >
       <Box
@@ -47,12 +48,9 @@ const AppBar = () => {
           <SvgIcon
             component={TrelloIcon}
             inheritViewBox
-            sx={{ color: 'primary.main', fontSize: '1.35rem' }}
+            sx={{ color: 'white', fontSize: '1.35rem' }}
           />
-          <Typography
-            variant="h1"
-            sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'primary.main' }}
-          >
+          <Typography variant="h1" sx={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'white' }}>
             TaskFlow
           </Typography>
         </Box>
@@ -68,7 +66,12 @@ const AppBar = () => {
           <Started />
           <Templates />
         </Box>
-        <Button variant="outlined" endIcon={<LibraryAdd />}>
+        <Button
+          sx={{
+            color: 'white'
+          }}
+          endIcon={<LibraryAdd />}
+        >
           Create
         </Button>
       </Box>
