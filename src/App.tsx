@@ -1,14 +1,11 @@
-import Button from '@mui/material/Button'
-import AbcIcon from '@mui/icons-material/Abc'
-import Typography from '@mui/material/Typography'
 import { useColorScheme } from '@mui/material/styles'
-import useMediaQuery from '@mui/material/useMediaQuery'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select, { SelectChangeEvent } from '@mui/material/Select'
 import Box from '@mui/material/Box'
 import { DarkModeOutlined, LightModeOutlined, SettingsBrightness } from '@mui/icons-material'
+import Container from '@mui/material/Container'
 function ModeSelect() {
   const { mode, setMode } = useColorScheme()
   type typeMode = typeof mode & null
@@ -52,32 +49,45 @@ function ModeSelect() {
   )
 }
 
-function ModeToggle() {
-  const { mode, setMode } = useColorScheme()
-  return (
-    <Button
-      onClick={() => {
-        setMode(mode === 'light' ? 'dark' : 'light')
-      }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
-  )
-}
 const App = () => {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
-
   return (
-    <>
-      <ModeSelect />
-      {prefersDarkMode}
-      <ModeToggle />
-      <Typography variant="body2" color="text.secondary">
-        Text Seconnary
-      </Typography>
-      <Button variant="contained">Hello world</Button>
-      <AbcIcon color="secondary" />
-    </>
+    <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
+      <Box
+        sx={{
+          backgroundColor: 'primary.light',
+          width: '100%',
+          height: (theme) => theme.app.appBarHeight,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        <ModeSelect />
+      </Box>
+
+      <Box
+        sx={{
+          backgroundColor: 'primary.dark',
+          width: '100%',
+          height: (theme) => theme.app.boardBarHeight,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        ModeBar
+      </Box>
+      <Box
+        sx={{
+          backgroundColor: 'primary.main',
+          width: '100%',
+          height: (theme) =>
+            `calc(100vh - ${theme.app.appBarHeight} - ${theme.app.boardBarHeight})`,
+          display: 'flex',
+          alignItems: 'center'
+        }}
+      >
+        Board Content
+      </Box>
+    </Container>
   )
 }
 
