@@ -1,7 +1,8 @@
+import { Card as TypeCard } from '@/apis/mock-data'
 import Card from '@/pages/Boards/BoardContent/ListColumns/Column/ListCards/Card/Card'
 import Box from '@mui/material/Box'
 
-const ListCards = () => (
+const ListCards = ({ cards }: { cards: TypeCard[] }) => (
   <Box
     sx={{
       p: '0 5px',
@@ -21,7 +22,9 @@ const ListCards = () => (
       }
     }}
   >
-    <Card />
+    {cards.map((card) => (
+      <Card key={card._id} card={card} />
+    ))}
   </Box>
 )
 

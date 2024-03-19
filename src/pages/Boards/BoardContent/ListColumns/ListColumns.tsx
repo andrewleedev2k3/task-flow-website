@@ -1,9 +1,10 @@
 import Box from '@mui/material/Box'
-import Column from '@/pages/Boards/BoardContent/ListColumns/Column/Column'
 import Button from '@mui/material/Button'
 import NoteAdd from '@mui/icons-material/NoteAdd'
+import { Column as TypeColumn } from '@/apis/mock-data'
+import Column from '@/pages/Boards/BoardContent/ListColumns/Column/Column'
 
-const ListColumns = () => {
+const ListColumns = ({ columns }: { columns: TypeColumn[] }) => {
   return (
     <Box
       sx={{
@@ -18,10 +19,9 @@ const ListColumns = () => {
         }
       }}
     >
-      <Column />
-      <Column />
-      <Column />
-      <Column />
+      {columns.map((column) => (
+        <Column key={column._id} column={column} />
+      ))}
       <Box
         sx={{
           minWidth: 200,

@@ -1,9 +1,11 @@
+import startcase from 'lodash.startcase'
 import Dashboard from '@mui/icons-material/Dashboard'
 import Chip from '@mui/material/Chip'
 import Box from '@mui/material/Box'
 import { AddToDrive, Bolt, FilterList, PersonAdd, VpnLock } from '@mui/icons-material'
 import InviteList from '@/pages/Boards/BoardBar/InviteList'
 import { Button } from '@mui/material'
+import { Board } from '@/apis/mock-data'
 const MENU_STYLE = {
   color: 'white',
   bgcolor: 'transparent',
@@ -17,7 +19,11 @@ const MENU_STYLE = {
     bgcolor: 'primary.50'
   }
 }
-const BoardBar = () => {
+
+interface IBoardBar {
+  board: Board
+}
+const BoardBar = ({ board }: IBoardBar) => {
   return (
     <Box
       sx={{
@@ -39,8 +45,8 @@ const BoardBar = () => {
           gap: 2
         }}
       >
-        <Chip sx={MENU_STYLE} icon={<Dashboard />} label="Andrew Lee Developer" clickable />
-        <Chip sx={MENU_STYLE} icon={<VpnLock />} label="Public/Private Workspaces" clickable />
+        <Chip sx={MENU_STYLE} icon={<Dashboard />} label={board?.title} clickable />
+        <Chip sx={MENU_STYLE} icon={<VpnLock />} label={startcase(board?.type)} clickable />
         <Chip sx={MENU_STYLE} icon={<AddToDrive />} label="Public/Private Workspaces" clickable />
         <Chip sx={MENU_STYLE} icon={<Bolt />} label="Automation" clickable />
         <Chip sx={MENU_STYLE} icon={<FilterList />} label="Filter" clickable />

@@ -14,8 +14,10 @@ import { AddCard, ContentCopy, ContentPaste, DragHandle } from '@mui/icons-mater
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import ListCards from '@/pages/Boards/BoardContent/ListColumns/Column/ListCards/ListCard'
-
-const Column = () => {
+import { Card, Column as TypeColumn } from '@/apis/mock-data'
+import { mapOrder } from '@/utils/sort'
+const Column = ({ column }: { column: TypeColumn }) => {
+  const orderedCars = mapOrder<Card>(column?.cards, column?.cardOrderIds, '_id')
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => setAnchorEl(event.currentTarget)
@@ -43,7 +45,7 @@ const Column = () => {
         }}
       >
         <Typography variant="h6" sx={{ fontSize: '1rem', fontWeight: 'bold', cursor: 'pointer' }}>
-          Colume Title
+          {column?.title}
         </Typography>
         <Box>
           <Tooltip
@@ -114,7 +116,7 @@ const Column = () => {
       </Box>
       {/* List Card */}
 
-      <ListCards />
+      <ListCards cards={orderedCars} />
       {/* List Footer */}
 
       <Box
