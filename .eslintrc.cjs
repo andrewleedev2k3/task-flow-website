@@ -55,6 +55,7 @@ module.exports = {
       {
         patterns: ['@mui/*/*/*']
       }
-    ]
+    ],
+    'no-extra-boolean-cast': 0
   }
 }
