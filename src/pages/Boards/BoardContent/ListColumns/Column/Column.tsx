@@ -23,7 +23,7 @@ import TextField from '@mui/material/TextField'
 import Close from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 
-const Column = ({ column }: { column: TypeColumn }) => {
+const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?: any }) => {
   const orderedCars = mapOrder<Card>(column?.cards, column?.cardOrderIds, '_id')
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -54,6 +54,14 @@ const Column = ({ column }: { column: TypeColumn }) => {
       })
       return
     }
+
+    const newCardData = {
+      title: value,
+      columnId: column._id
+    }
+
+    createNewCard(newCardData)
+
     toggleOpenNewCardForm()
     setValue('')
   }
