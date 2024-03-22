@@ -14,8 +14,7 @@ import { AddCard, ContentCopy, ContentPaste, DragHandle } from '@mui/icons-mater
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import ListCards from '@/pages/Boards/BoardContent/ListColumns/Column/ListCards/ListCard'
-import { Card, Column as TypeColumn } from '@/apis/mock-data'
-import { mapOrder } from '@/utils/sort'
+import { Column as TypeColumn } from '@/apis/mock-data'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useState } from 'react'
@@ -24,7 +23,7 @@ import Close from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 
 const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?: any }) => {
-  const orderedCars = mapOrder<Card>(column?.cards, column?.cardOrderIds, '_id')
+  const orderedCars = column.cards
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => setAnchorEl(event.currentTarget)
