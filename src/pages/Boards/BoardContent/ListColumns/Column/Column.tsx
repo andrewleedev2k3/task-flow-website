@@ -21,6 +21,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Close from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 
 const Column = ({ column }: { column: TypeColumn }) => {
   const orderedCars = mapOrder<Card>(column?.cards, column?.cardOrderIds, '_id')
@@ -48,7 +49,10 @@ const Column = ({ column }: { column: TypeColumn }) => {
   const toggleOpenNewCardForm = () => setOpenNewCardForm(!openNewCardForm)
   const handleAddNewCard = () => {
     if (!value) {
-      throw new Error('Please enter Card titlel')
+      toast.error('Please enter card title', {
+        position: 'bottom-right'
+      })
+      return
     }
     toggleOpenNewCardForm()
     setValue('')
