@@ -4,7 +4,7 @@ import Chip from '@mui/material/Chip'
 import Box from '@mui/material/Box'
 import { AddToDrive, Bolt, FilterList, PersonAdd, VpnLock } from '@mui/icons-material'
 import InviteList from '@/pages/Boards/BoardBar/InviteList'
-import { Button } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import { Board } from '@/apis/mock-data'
 const MENU_STYLE = {
   color: 'white',
@@ -45,7 +45,9 @@ const BoardBar = ({ board }: IBoardBar) => {
           gap: 2
         }}
       >
-        <Chip sx={MENU_STYLE} icon={<Dashboard />} label={board?.title} clickable />
+        <Tooltip title={board?.description}>
+          <Chip sx={MENU_STYLE} icon={<Dashboard />} label={board?.title} clickable />
+        </Tooltip>
         <Chip sx={MENU_STYLE} icon={<VpnLock />} label={startcase(board?.type)} clickable />
         <Chip sx={MENU_STYLE} icon={<AddToDrive />} label="Public/Private Workspaces" clickable />
         <Chip sx={MENU_STYLE} icon={<Bolt />} label="Automation" clickable />
