@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 import ListColumns from '@/pages/Boards/BoardContent/ListColumns/ListColumns'
 import { Board, Card as CardType, Column as ColumnType } from '@/apis/mock-data'
-import { mapOrder } from '@/utils/sort'
 import {
   DndContext,
   DragEndEvent,
@@ -35,9 +34,16 @@ interface IBoardContent {
   createNewColumn: any
   createNewCard: any
   moveColumns: any
+  moveCardInTheSameColumn: any
 }
 
-const BoardContent = ({ board, createNewColumn, createNewCard, moveColumns }: IBoardContent) => {
+const BoardContent = ({
+  board,
+  createNewColumn,
+  createNewCard,
+  moveColumns,
+  moveCardInTheSameColumn
+}: IBoardContent) => {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10
@@ -61,7 +67,7 @@ const BoardContent = ({ board, createNewColumn, createNewCard, moveColumns }: IB
   const lastOverId = useRef<UniqueIdentifier | null>(null)
 
   useEffect(() => {
-    setOrderedColumns(mapOrder<ColumnType>(board?.columns, board?.columnOrderIds, '_id'))
+    setOrderedColumns(board.columns)
   }, [board])
 
   const findColByCardId = (cardId: string) => {
@@ -205,11 +211,14 @@ const BoardContent = ({ board, createNewColumn, createNewCard, moveColumns }: IB
           (col) => col._id === activeId
         )
         const newCardIndex = overColumn?.cards.findIndex((col) => col._id === overCardId)
+
         const dndOrderedCards = arrayMove(
           oldColumnWhenDraggingCard!.cards,
           oldCardIndex!,
           newCardIndex
         )
+
+        const dndOrderedCardIds = dndOrderedCards.map((card) => card._id)
 
         setOrderedColumns((prevColumns) => {
           const nextColumns = cloneDeep(prevColumns)
@@ -218,11 +227,12 @@ const BoardContent = ({ board, createNewColumn, createNewCard, moveColumns }: IB
 
           if (targetColumn) {
             targetColumn.cards = dndOrderedCards
-            targetColumn.cardOrderIds = dndOrderedCards.map((card) => card._id)
+            targetColumn.cardOrderIds = dndOrderedCardIds
           }
 
           return nextColumns
         })
+        moveCardInTheSameColumn(dndOrderedCards, dndOrderedCardIds, oldColumnWhenDraggingCard?._id)
       }
     }
 

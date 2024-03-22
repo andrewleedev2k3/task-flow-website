@@ -18,6 +18,10 @@ export const createNewCardAPI = async (data: any) => {
 
 export const updateBoardDetailsAPI = async (boardId: string, data: any) => {
   const request = await axios.put(`${API_ROOT}/v1/boards/${boardId}`, data)
+  return request.data
+}
 
+export const updateColumnDetailsAPI = async (columnId: string, data: any) => {
+  const request = await axios.put(`${API_ROOT}/v1/columns/${columnId}`, data)
   return request.data
 }
