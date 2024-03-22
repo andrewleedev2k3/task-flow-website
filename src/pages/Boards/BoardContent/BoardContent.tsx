@@ -6,8 +6,6 @@ import {
   DndContext,
   DragEndEvent,
   DragStartEvent,
-  MouseSensor,
-  TouchSensor,
   UniqueIdentifier,
   useSensor,
   useSensors,
@@ -24,6 +22,7 @@ import {
   getFirstCollision,
   closestCenter
 } from '@dnd-kit/core'
+import { MouseSensor, TouchSensor } from '@/custom-libaries/DndKitSensors'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 import Column from '@/pages/Boards/BoardContent/ListColumns/Column/Column'
