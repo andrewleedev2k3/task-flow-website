@@ -8,11 +8,12 @@ import { fetchBoardDetailsAPI } from '@/apis'
 const Board = () => {
   const [board, setBoard] = useState<Board | null>(null)
   useEffect(() => {
-    const boardId = '65fd188ba8dd657557ab01d'
+    const boardId = '65fd188ba8dd657557ab01ad'
     fetchBoardDetailsAPI(boardId).then((board) => {
       setBoard(board)
     })
   }, [])
+
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
       <AppBar />
