@@ -56,6 +56,7 @@ module.exports = {
         patterns: ['@mui/*/*/*']
       }
     ],
-    'no-extra-boolean-cast': 0
+    'no-extra-boolean-cast': 0,
+    '@typescript-eslint/no-explicit-any': 'off'
   }
 }

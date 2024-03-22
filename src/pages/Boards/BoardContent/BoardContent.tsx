@@ -32,9 +32,12 @@ import { generatePlaceholderCard } from '@/utils/formatters'
 
 interface IBoardContent {
   board: Board
+  createNewColumn: any
+  createNewCard: any
+  moveColumns: any
 }
 
-const BoardContent = ({ board }: IBoardContent) => {
+const BoardContent = ({ board, createNewColumn, createNewCard, moveColumns }: IBoardContent) => {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
       distance: 10
@@ -188,7 +191,6 @@ const BoardContent = ({ board }: IBoardContent) => {
       if (!activeColumn || !overColumn) return
 
       if (oldColumnWhenDraggingCard!._id !== overColumn._id) {
-        // Hành động kéo thả card giữa 2 column khác nhau
         moveCarrdBetweenDifferentColumns(
           overColumn,
           overCardId,
@@ -228,7 +230,11 @@ const BoardContent = ({ board }: IBoardContent) => {
       const oldColumnIndex = orderedColumns.findIndex((col) => col._id === active.id)
       const newColumnIndex = orderedColumns.findIndex((col) => col._id === over?.id)
       const dndOrderedColumns = arrayMove(orderedColumns, oldColumnIndex, newColumnIndex)
+
+      // Small trick
       setOrderedColumns(dndOrderedColumns)
+
+      moveColumns(dndOrderedColumns)
     }
 
     setActiveTypeColumn(false)
@@ -296,7 +302,11 @@ const BoardContent = ({ board }: IBoardContent) => {
           p: '10px 0'
         }}
       >
-        <ListColumns columns={orderedColumns} />
+        <ListColumns
+          columns={orderedColumns}
+          createNewColumn={createNewColumn}
+          createNewCard={createNewCard}
+        />
         <DragOverlay dropAnimation={dropAnimation}>
           {(!activeId || !activeTypeColumn) && null}
           {activeId && activeTypeColumn && <Column column={activeData as ColumnType} />}
