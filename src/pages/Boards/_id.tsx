@@ -2,7 +2,7 @@ import Container from '@mui/material/Container'
 import AppBar from '@/components/AppBar/AppBar'
 import BoardBar from './BoardBar/BoardBar'
 import BoardContent from './BoardContent/BoardContent'
-import { Board, Card, Column } from '@/types/board'
+import { Board as BoardType, Card, Column } from '@/types/board'
 import { useEffect, useState } from 'react'
 import {
   createNewCardAPI,
@@ -21,7 +21,7 @@ import Box from '@mui/material/Box'
 import { Typography } from '@mui/material'
 import { toast } from 'react-toastify'
 const Board = () => {
-  const [board, setBoard] = useState<Board | null>(null)
+  const [board, setBoard] = useState<BoardType | null>(null)
   useEffect(() => {
     const boardId = '65fd188ba8dd657557ab01ad'
 
@@ -29,7 +29,7 @@ const Board = () => {
       if (board) {
         board.columns = mapOrder(board.columns, board.columnOrderIds, '_id')
       }
-      const data = board as Board
+      const data = board as BoardType
       data.columns.forEach((col) => {
         if (isEmpty(col.cards)) {
           col.cards = [generatePlaceholderCard(col)]
@@ -53,7 +53,7 @@ const Board = () => {
 
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
     newBoard.columns.push(createdColumn)
     newBoard.columnOrderIds.push(createdColumn._id)
     setBoard(newBoard)
@@ -66,7 +66,7 @@ const Board = () => {
     })
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
 
     const columnToUpdate = newBoard.columns.find((col) => col._id === createdCard.columnId)
     if (columnToUpdate) {
@@ -85,7 +85,7 @@ const Board = () => {
     const dndOrderedColumnsIds = dndOrderedColumns.map((col) => col._id)
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
     newBoard.columns = dndOrderedColumns
     newBoard.columnOrderIds = dndOrderedColumnsIds
     updateBoardDetailsAPI(newBoard._id, {
@@ -101,7 +101,7 @@ const Board = () => {
   ) => {
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
 
     const columnToUpdate = newBoard.columns.find((col) => col._id === columnId)
 
@@ -123,7 +123,7 @@ const Board = () => {
     const dndOrderedCardIds = dndOrderedColumns.map((col) => col._id)
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
     newBoard.columns = dndOrderedColumns
     newBoard.columnOrderIds = dndOrderedCardIds
     setBoard(newBoard)
@@ -144,7 +144,7 @@ const Board = () => {
   const deleteColumnDetails = (columnId: string) => {
     const newBoard = {
       ...board
-    } as Board
+    } as BoardType
     newBoard.columns = newBoard.columns.filter((col) => col._id !== columnId)
     newBoard.columnOrderIds = newBoard.columnOrderIds.filter((id) => id !== columnId)
 
@@ -176,9 +176,9 @@ const Board = () => {
   return (
     <Container disableGutters maxWidth={false} sx={{ height: '100vh' }}>
       <AppBar />
-      <BoardBar board={board as Board} />
+      <BoardBar board={board as BoardType} />
       <BoardContent
-        board={board as Board}
+        board={board as BoardType}
         createNewColumn={createNewColumn}
         createNewCard={createNewCard}
         moveColumns={moveColumns}
