@@ -24,6 +24,7 @@
     "@fontsource/roboto": "^5.0.12",
     "@mui/icons-material": "^5.15.13",
     "@mui/material": "^5.15.13",
+    "@rollup/rollup-linux-x64-gnu": "^4.13.0",
     "axios": "^1.5.1",
     "cross-env": "^7.0.3",
     "lodash": "^4.17.21",
