@@ -1,4 +1,4 @@
-import { Card as TypeCard } from '@/apis/mock-data'
+import { Card as TypeCard } from '@/types/board'
 import Card from '@/pages/Boards/BoardContent/ListColumns/Column/ListCards/Card/Card'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 import Box from '@mui/material/Box'

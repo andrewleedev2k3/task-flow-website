@@ -1,4 +1,4 @@
-import { Column } from '@/apis/mock-data'
+import { Column } from '@/types/board'
 
 export const generatePlaceholderCard = (column: Column) => {
   return {

@@ -5,7 +5,7 @@ import Box from '@mui/material/Box'
 import { AddToDrive, Bolt, FilterList, PersonAdd, VpnLock } from '@mui/icons-material'
 import InviteList from '@/pages/Boards/BoardBar/InviteList'
 import { Button, Tooltip } from '@mui/material'
-import { Board } from '@/apis/mock-data'
+import { Board } from '@/types/board'
 const MENU_STYLE = {
   color: 'white',
   bgcolor: 'transparent',
