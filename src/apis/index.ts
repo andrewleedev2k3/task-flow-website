@@ -25,3 +25,8 @@ export const updateColumnDetailsAPI = async (columnId: string, data: any) => {
   const request = await axios.put(`${API_ROOT}/v1/columns/${columnId}`, data)
   return request.data
 }
+
+export const moveCardToDifferentColumnAPI = async (data: any) => {
+  const request = await axios.put(`${API_ROOT}/v1/boards/supports/moving-card`, data)
+  return request.data
+}
