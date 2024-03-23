@@ -5,6 +5,9 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  esbuild: {
+    target: 'esnext'
+  },
   define: {
     'process.env': process.env
   },
