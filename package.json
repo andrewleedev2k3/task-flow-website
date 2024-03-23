@@ -51,5 +51,8 @@
     "typescript": "^5.2.2",
     "vite": "^5.1.6",
     "vite-plugin-svgr": "^3.2.0"
+  },
+  "resolutions": {
+    "rollup": "npm:@rollup/wasm-node"
   }
 }
