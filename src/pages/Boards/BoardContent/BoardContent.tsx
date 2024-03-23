@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box'
 import ListColumns from '@/pages/Boards/BoardContent/ListColumns/ListColumns'
-import { Board, Card as CardType, Column as ColumnType } from '@/apis/mock-data'
+import { Board, Card as CardType, Column as ColumnType } from '@/types/board'
 import {
   DndContext,
   DragEndEvent,
@@ -36,6 +36,7 @@ interface IBoardContent {
   moveColumns: any
   moveCardInTheSameColumn: any
   moveCardToDifferentColumn: any
+  deleteColumnDetails: any
 }
 
 const BoardContent = ({
@@ -44,7 +45,8 @@ const BoardContent = ({
   createNewCard,
   moveColumns,
   moveCardInTheSameColumn,
-  moveCardToDifferentColumn
+  moveCardToDifferentColumn,
+  deleteColumnDetails
 }: IBoardContent) => {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -332,6 +334,7 @@ const BoardContent = ({
           columns={orderedColumns}
           createNewColumn={createNewColumn}
           createNewCard={createNewCard}
+          deleteColumnDetails={deleteColumnDetails}
         />
         <DragOverlay dropAnimation={dropAnimation}>
           {(!activeId || !activeTypeColumn) && null}

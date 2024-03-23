@@ -14,15 +14,24 @@ import { AddCard, ContentCopy, ContentPaste, DragHandle } from '@mui/icons-mater
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import ListCards from '@/pages/Boards/BoardContent/ListColumns/Column/ListCards/ListCard'
-import { Column as TypeColumn } from '@/apis/mock-data'
+import { Column as TypeColumn } from '@/types/board'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import Close from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
+import { useConfirm } from 'material-ui-confirm'
 
-const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?: any }) => {
+const Column = ({
+  column,
+  createNewCard,
+  deleteColumnDetails
+}: {
+  column: TypeColumn
+  createNewCard?: any
+  deleteColumnDetails?: any
+}) => {
   const orderedCars = column.cards
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
@@ -63,6 +72,22 @@ const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?:
 
     toggleOpenNewCardForm()
     setValue('')
+  }
+
+  const confirmDeleteColumn = useConfirm()
+
+  const handleDeleteColumn = () => {
+    confirmDeleteColumn({
+      title: 'Delete Column?',
+      description: 'This action will permanently delete your Column and its Cards! Are you sure?',
+      confirmationText: 'Confirm',
+      cancellationText: 'Cancel'
+      // confirmationKeyword: 'delete'
+    })
+      .then(() => {
+        deleteColumnDetails(column._id)
+      })
+      .catch(() => {})
   }
   return (
     <div ref={setNodeRef} style={dndKitColumnStyles} {...attributes}>
@@ -111,13 +136,24 @@ const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?:
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              onClick={handleClose}
               MenuListProps={{
                 'aria-labelledby': 'column-dropdown'
               }}
             >
-              <MenuItem>
+              <MenuItem
+                sx={{
+                  '&:hover': {
+                    color: 'info.light',
+                    '& .add-card-icon': {
+                      color: 'info.light'
+                    }
+                  }
+                }}
+                onClick={toggleOpenNewCardForm}
+              >
                 <ListItemIcon>
-                  <AddCard fontSize="small" />
+                  <AddCard className="add-card-icon" fontSize="small" />
                 </ListItemIcon>
                 <ListItemText>Add new card</ListItemText>
               </MenuItem>
@@ -141,11 +177,21 @@ const Column = ({ column, createNewCard }: { column: TypeColumn; createNewCard?:
               </MenuItem>
               <Divider />
 
-              <MenuItem>
+              <MenuItem
+                sx={{
+                  '&:hover': {
+                    color: 'error.light',
+                    '& .delete-forever-icon': {
+                      color: 'error.light'
+                    }
+                  }
+                }}
+                onClick={handleDeleteColumn}
+              >
                 <ListItemIcon>
-                  <DeleteForever fontSize="small" />
+                  <DeleteForever className="delete-forever-icon" fontSize="small" />
                 </ListItemIcon>
-                <ListItemText>Remove this column</ListItemText>
+                <ListItemText>Delete this column</ListItemText>
               </MenuItem>
 
               <MenuItem>

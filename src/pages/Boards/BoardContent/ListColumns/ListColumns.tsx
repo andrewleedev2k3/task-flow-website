@@ -1,7 +1,7 @@
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import NoteAdd from '@mui/icons-material/NoteAdd'
-import { Column as TypeColumn } from '@/apis/mock-data'
+import { Column as TypeColumn } from '@/types/board'
 import Column from '@/pages/Boards/BoardContent/ListColumns/Column/Column'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
 import { useState } from 'react'
@@ -12,11 +12,13 @@ import { toast } from 'react-toastify'
 const ListColumns = ({
   columns,
   createNewColumn,
-  createNewCard
+  createNewCard,
+  deleteColumnDetails
 }: {
   columns: TypeColumn[]
   createNewColumn: any
   createNewCard: any
+  deleteColumnDetails: any
 }) => {
   const [openNewColumnForm, setOpenNewColumnForm] = useState<boolean>(false)
   const [value, setValue] = useState<string>('')
@@ -56,7 +58,12 @@ const ListColumns = ({
         }}
       >
         {columns.map((column) => (
-          <Column key={column._id} column={column} createNewCard={createNewCard} />
+          <Column
+            key={column._id}
+            column={column}
+            createNewCard={createNewCard}
+            deleteColumnDetails={deleteColumnDetails}
+          />
         ))}
         <Box
           sx={{

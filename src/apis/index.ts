@@ -30,3 +30,8 @@ export const moveCardToDifferentColumnAPI = async (data: any) => {
   const request = await axios.put(`${API_ROOT}/v1/boards/supports/moving-card`, data)
   return request.data
 }
+
+export const deleteColumnDetailsAPI = async (columnId: string) => {
+  const request = await axios.delete(`${API_ROOT}/v1/columns/${columnId}`)
+  return request.data
+}

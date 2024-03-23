@@ -5,7 +5,7 @@ import { Card as MuiCard } from '@mui/material'
 import CardMedia from '@mui/material/CardMedia'
 import CardContent from '@mui/material/CardContent'
 import CardActions from '@mui/material/CardActions'
-import { Card as TypeCard } from '@/apis/mock-data'
+import { Card as TypeCard } from '@/types/board'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
