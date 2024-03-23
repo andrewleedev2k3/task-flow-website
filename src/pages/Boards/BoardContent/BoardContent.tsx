@@ -35,6 +35,7 @@ interface IBoardContent {
   createNewCard: any
   moveColumns: any
   moveCardInTheSameColumn: any
+  moveCardToDifferentColumn: any
 }
 
 const BoardContent = ({
@@ -42,7 +43,8 @@ const BoardContent = ({
   createNewColumn,
   createNewCard,
   moveColumns,
-  moveCardInTheSameColumn
+  moveCardInTheSameColumn,
+  moveCardToDifferentColumn
 }: IBoardContent) => {
   const mouseSensor = useSensor(MouseSensor, {
     activationConstraint: {
@@ -81,7 +83,8 @@ const BoardContent = ({
     over: Over,
     activeColumn: ColumnType,
     activeDraggingCardId: UniqueIdentifier,
-    activeDraggingCardData: CardType
+    activeDraggingCardData: CardType,
+    triggerFrom: string
   ) => {
     setOrderedColumns((prevColumns) => {
       const overCardIndex = overColumn?.cards?.findIndex((card) => card._id === overCardId)
@@ -132,6 +135,17 @@ const BoardContent = ({
 
         nextOverColumn.cardOrderIds = nextOverColumn.cards.map((card) => card._id)
       }
+
+      // Call API
+      if (triggerFrom === 'handleDragEnd') {
+        moveCardToDifferentColumn(
+          activeDraggingCardId,
+          oldColumnWhenDraggingCard?._id,
+          nextOverColumn?._id,
+          nextColumns
+        )
+      }
+
       return nextColumns
     })
   }
@@ -175,7 +189,8 @@ const BoardContent = ({
         over,
         activeColumn,
         activeDraggingCardId,
-        activeDraggingCardData as CardType
+        activeDraggingCardData as CardType,
+        'handleDragOver'
       )
     }
   }
@@ -204,7 +219,8 @@ const BoardContent = ({
           over,
           activeColumn,
           activeDraggingCardId,
-          activeDraggingCardData as CardType
+          activeDraggingCardData as CardType,
+          'handleDragEnd'
         )
       } else {
         const oldCardIndex = oldColumnWhenDraggingCard?.cards.findIndex(

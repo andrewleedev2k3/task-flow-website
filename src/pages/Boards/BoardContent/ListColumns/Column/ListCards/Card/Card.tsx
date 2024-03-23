@@ -17,8 +17,8 @@ const Card = ({ card }: { card: TypeCard }) => {
   const dndKitCardStyle = {
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : undefined,
-    border: isDragging ? '2px solid #0984e3' : undefined
+    opacity: isDragging && !card?.FE_PlaceholderCard ? 0.5 : undefined,
+    border: isDragging && !card?.FE_PlaceholderCard ? '2px solid #0984e3' : undefined
   }
 
   const isShowCardActions: boolean =
