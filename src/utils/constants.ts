@@ -1,4 +1,4 @@
-let apiRoot = ''
+let apiRoot = 'https://task-flow-api-541w.onrender.com'
 
 if (process.env.BUILD_MODE === 'dev') {
   apiRoot = 'http://localhost:3000'
